@@ -1,0 +1,67 @@
+{
+  "name": "demo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/demo/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": [
+        "dist/apps/demo"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "cwd": "apps/demo",
+        "command": "NODE_ENV=development rspack build -c rspack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "command": "NODE_ENV=production rspack build -c rspack.config.js"
+        }
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "defaultConfiguration": "development",
+      "options": {
+        "cwd": "apps/demo",
+        "command": "NODE_ENV=development rspack serve -c rspack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "command": "NODE_ENV=production rspack serve -c rspack.config.js"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/demo/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/demo/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
