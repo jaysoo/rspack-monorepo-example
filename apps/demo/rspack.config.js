@@ -1,4 +1,4 @@
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+//const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { resolve } = require('path');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -6,6 +6,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   mode: 'development',
+  context: __dirname,
   entry: {
     main: {
       import: ["./src/main.tsx"],
@@ -34,9 +35,9 @@ module.exports = {
       '@rspack-monorepo-example/ui': '../../libs/ui/src/index.ts'
     },
     // This is not working it seems?
-    plugins: [new TsconfigPathsPlugin({
-      configFile: resolve(__dirname, 'tsconfig.app.json')
-    })]
+    //plugins: [new TsconfigPathsPlugin({
+    //  configFile: resolve(__dirname, 'tsconfig.app.json')
+    //})]
   },
   infrastructureLogging: {
     debug: false,

@@ -5,34 +5,28 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "nx:run-commands",
+      "executor": "@rspack-monorepo-example/rspack:build",
       "outputs": [
         "dist/apps/demo"
       ],
       "defaultConfiguration": "production",
       "options": {
-        "cwd": "apps/demo",
-        "command": "NODE_ENV=development rspack build -c rspack.config.js"
+        "rspackConfig": "apps/demo/rspack.config.js"
       },
       "configurations": {
         "development": {},
-        "production": {
-          "command": "NODE_ENV=production rspack build -c rspack.config.js"
-        }
+        "production": {}
       }
     },
     "serve": {
-      "executor": "nx:run-commands",
+      "executor": "@rspack-monorepo-example/rspack:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "cwd": "apps/demo",
-        "command": "NODE_ENV=development rspack serve -c rspack.config.js"
+        "rspackConfig": "apps/demo/rspack.config.js"
       },
       "configurations": {
         "development": {},
-        "production": {
-          "command": "NODE_ENV=production rspack serve -c rspack.config.js"
-        }
+        "production": {}
       }
     },
     "lint": {
