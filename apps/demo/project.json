@@ -5,12 +5,13 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/rspack:build",
+      "executor": "@nrwl/rspack:rspack",
       "outputs": [
         "dist/apps/demo"
       ],
       "defaultConfiguration": "production",
       "options": {
+        "target": "web",
         "main": "apps/demo/src/main.tsx",
         "outputPath": "dist/apps/demo",
         "tsConfig": "apps/demo/tsconfig.app.json",
@@ -23,13 +24,13 @@
     },
     "serve": {
       "executor": "@nrwl/rspack:dev-server",
-      "defaultConfiguration": "development",
       "options": {
         "buildTarget": "demo:build"
       },
       "configurations": {
-        "development": {},
-        "production": {}
+        "production": {
+          "buildTarget": "demo:build:production"
+        }
       }
     },
     "lint": {

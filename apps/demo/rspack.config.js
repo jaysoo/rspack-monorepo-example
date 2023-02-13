@@ -1,3 +1,10 @@
-const { withNx } = require('@nrwl/rspack');
+const { composePlugins, withNx, withReact } = require('@nrwl/rspack');
 
-module.exports = withNx();
+module.exports = composePlugins(
+  withNx(),
+  withReact({ style: 'css' }),
+  (config) => {
+    console.log(config);
+    return config;
+  }
+);
