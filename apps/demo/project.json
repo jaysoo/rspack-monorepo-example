@@ -5,12 +5,16 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@rspack-monorepo-example/rspack:build",
+      "executor": "@nrwl/rspack:rspack",
       "outputs": [
         "dist/apps/demo"
       ],
       "defaultConfiguration": "production",
       "options": {
+        "target": "web",
+        "main": "apps/demo/src/main.tsx",
+        "outputPath": "dist/apps/demo",
+        "tsConfig": "apps/demo/tsconfig.app.json",
         "rspackConfig": "apps/demo/rspack.config.js"
       },
       "configurations": {
@@ -19,14 +23,14 @@
       }
     },
     "serve": {
-      "executor": "@rspack-monorepo-example/rspack:dev-server",
-      "defaultConfiguration": "development",
+      "executor": "@nrwl/rspack:dev-server",
       "options": {
-        "rspackConfig": "apps/demo/rspack.config.js"
+        "buildTarget": "demo:build"
       },
       "configurations": {
-        "development": {},
-        "production": {}
+        "production": {
+          "buildTarget": "demo:build:production"
+        }
       }
     },
     "lint": {
